@@ -3,18 +3,35 @@ import aiomysql
 import datetime
 import time
 query = "select payment_method_id from order_prepaidorders inner join order_order on " \
-        "(order_prepaidorders.order_id=order_order.id) inner join order_invoice on (order_order.invoice_id=order_invoice.id) where order_invoice.payment_method='payu'"
+        "(order_prepaidorders.order_id=order_order.id) inner join order_invoice on (order_order.invoice_id=order_invoice.id) where order_invoice.payment_method='payu' " \
+        "and order_order.status='in_transit'"
+
+
+async def create_conn_pool():
+    global g_pool
+    print ("gpool*******************: %s", g_pool)
+    if g_pool is None:
+        g_pool = await aiomysql.create_pool(host='127.0.0.1', port=3306, minsize=1,
+                                          user='root', password='password', db='db10042015',
+                                          )
+    return g_pool
 
 
 async def execute_query():
+    #pool = await aiomysql.create_pool(host='127.0.0.1', port=3306, minsize=10,
+                                      #user='root', password='password', db='db10042015')
     conn = await aiomysql.connect(host='127.0.0.1', port=3306,
                                   user='root', password='password', db='db10042015')
 
+    #with (await pool) as conn:
     async with conn.cursor() as cur:
+        #cur = await conn.cursor()
         await cur.execute(query)
         r = await cur.fetchall()
         await cur.close()
         return r
+    #pool.close()
+    #await pool.wait_closed()
 
 
 def get_results(func1, func2):

@@ -33,7 +33,7 @@ def order_details():
     #count = AsyncOrder.objects.count()
     #latest = AsyncOrder.objects.latest('id')
     #data = {"count": count, "latest": latest.id}
-    data = list(PrepaidOrders.objects.filter(order__invoice__payment_method='payu').values_list('payment_method_id'))
+    data = list(PrepaidOrders.objects.filter(order__invoice__payment_method='payu', order__status='in_transit').values_list('payment_method_id'))
     #data = cpu_task()
     return data
 
@@ -41,6 +41,6 @@ def member_details():
     #count = AsyncMember.objects.count()
     #latest = AsyncMember.objects.latest('id')
     #data = {"count": count, "latest": latest.id}
-    data = list(PrepaidOrders.objects.filter(order__invoice__payment_method='payu').values_list('payment_method_id'))
+    data = list(PrepaidOrders.objects.filter(order__invoice__payment_method='payu', order__status='in_transit').values_list('payment_method_id'))
     #data = cpu_task()
     return data
