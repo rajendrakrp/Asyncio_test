@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
 	'ENGINE': 'django.contrib.gis.db.backends.mysql',
         # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.                                                                                                             
-        'NAME': '<db>', # Or path to database file if using sqlite3.
+        'NAME': 'db10042015', # Or path to database file if using sqlite3.
         'USER': 'root', # Not used with sqlite3.
         'PASSWORD': 'password', # Not used with sqlite3.
         'HOST': '127.0.0.1', # Set to empty string for localhost. Not used with sqlite3.

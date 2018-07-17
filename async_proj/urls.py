@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from async_app.views import TestAsync, TestAsyncFromSync, TestDbCall
+from async_app.views import TestAsync, TestAsyncFromSync, TestDbCall, TestAsyncDbCall
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^test/', TestAsync.as_view()),
     url(r'^test_sync/', TestAsyncFromSync.as_view()),
     url(r'^db_sync/', TestDbCall.as_view()),
+    url(r'^async_db/', TestAsyncDbCall.as_view())
 ]

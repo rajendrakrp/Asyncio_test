@@ -23,16 +23,24 @@ def get_results(func1, func2):
     print ("time diff:", (datetime.datetime.now() - t1))
     return responses
 
+def cpu_task():
+    sd = 242342353425 * (2131234*12)/233234 * 23423
+    for i in range(1000):
+        v = sd*i
+    return 1
+
 def order_details():
-    count = AsyncOrder.objects.count()
-    latest = AsyncOrder.objects.latest('id')
-    data = {"count": count, "latest": latest.id}
-    time.sleep(10)
+    #count = AsyncOrder.objects.count()
+    #latest = AsyncOrder.objects.latest('id')
+    #data = {"count": count, "latest": latest.id}
+    data = list(PrepaidOrders.objects.filter(order__invoice__payment_method='payu').values_list('payment_method_id'))
+    #data = cpu_task()
     return data
 
 def member_details():
-    count = AsyncMember.objects.count()
-    latest = AsyncMember.objects.latest('id')
-    data = {"count": count, "latest": latest.id}
-    time.sleep(5)
+    #count = AsyncMember.objects.count()
+    #latest = AsyncMember.objects.latest('id')
+    #data = {"count": count, "latest": latest.id}
+    data = list(PrepaidOrders.objects.filter(order__invoice__payment_method='payu').values_list('payment_method_id'))
+    #data = cpu_task()
     return data

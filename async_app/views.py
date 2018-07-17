@@ -35,7 +35,13 @@ class TestDbCall(TemplateView):
         print ("response:", response)
         return render(request, 'test.html')
 
+class TestAsyncDbCall(TemplateView):
+    template_name = 'test.html'
 
-
-
+    def get(self, request, *args, **kwargs):
+        print ("Testing db calls")
+        from async_app.async_db_utils import get_results, func1, func2
+        response = get_results(func1, func2)
+        print ("response:", response)
+        return render(request, 'test.html')
 
