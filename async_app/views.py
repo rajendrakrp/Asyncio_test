@@ -1,9 +1,21 @@
 from django.shortcuts import render_to_response, render
-
-# Create your views here.
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from django.views.generic import TemplateView
 import asyncio
+
+class HelloWorld1(TemplateView):
+    template_name = 'test.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'test.html')
+
+class HelloWorld(APIView):
+    def get(self, request):
+        return Response({"hello": "world"})
+
+
 
 class TestAsync(TemplateView):
     template_name = 'test.html'
